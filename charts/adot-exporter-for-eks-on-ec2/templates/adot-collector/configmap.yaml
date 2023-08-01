@@ -64,8 +64,8 @@ data:
     service:
       pipelines:
         traces: 
-        receivers: [otlp]
-        exporters: [awsxray]
+          receivers: [otlp]
+          exporters: [awsxray]
         metrics:
           receivers: {{- range .Values.adotCollector.daemonSet.service.metrics.receivers }}
           - {{.}} {{- end }}
