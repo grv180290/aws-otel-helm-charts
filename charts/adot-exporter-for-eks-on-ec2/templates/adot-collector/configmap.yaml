@@ -16,6 +16,12 @@ data:
       sigv4auth:
         region: {{ .Values.awsRegion }}
     receivers:
+      otlp:
+        protocols: 
+          grpc:
+            endpoint: {{ .Values.adotCollector.daemonSet.otlpreceivers.grpcendpoint }}
+          http:
+            endpoint: {{ .Values.adotCollector.daemonSet.otlpreceivers.httpendpoint }}
       awscontainerinsightreceiver:
         collection_interval: {{ .Values.adotCollector.daemonSet.cwreceivers.collectionInterval }}
         container_orchestrator: {{ .Values.adotCollector.daemonSet.cwreceivers.containerOrchestrator }}
@@ -33,6 +39,8 @@ data:
       batch/metrics:
         timeout: {{ .Values.adotCollector.daemonSet.processors.timeout }}
     exporters:
+      awsxray:
+        region: {{ .Values.awsRegion }}
       awsemf:
         namespace: {{ .Values.adotCollector.daemonSet.cwexporters.namespace }}
         log_group_name: '/aws/containerinsights/{{ .Values.clusterName }}/performance'
@@ -55,6 +63,9 @@ data:
         
     service:
       pipelines:
+        traces: 
+        receivers: [otlp]
+        exporters: [awsxray]
         metrics:
           receivers: {{- range .Values.adotCollector.daemonSet.service.metrics.receivers }}
           - {{.}} {{- end }}

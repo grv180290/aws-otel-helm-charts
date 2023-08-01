@@ -2,7 +2,7 @@ nameOverride: ""
 fullnameOverride: ""
 global:
   namespaceOverride: ""
-awsRegion: ""
+awsRegion: "us-east-1"
 clusterName: ""
 
 # -- Additional labels to add into metadata
@@ -119,6 +119,9 @@ adotCollector:
       healthCheck: ""
       sigv4auth:
         region: ""
+    otlpreceivers:
+      grpcendpoint: 0.0.0.0:4317
+      httpendpoint: 0.0.0.0:4318
     cwreceivers:
       collectionInterval: ""
       containerOrchestrator: ""
