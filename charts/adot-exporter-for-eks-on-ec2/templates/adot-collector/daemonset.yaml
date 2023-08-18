@@ -32,6 +32,8 @@ spec:
             {{- toYaml .Values.adotCollector.daemonSet.volumeMounts | nindent 12 }}
           resources:
             {{- toYaml .Values.adotCollector.daemonSet.resources | nindent 12 }}
+      imagePullSecrets:
+      - name: {{ .Values.adotCollector.daemonset.privateregistrysecret }}
       volumes:
         {{- toYaml .Values.adotCollector.daemonSet.volumes | nindent 10 }}
       serviceAccountName: {{ .Values.adotCollector.daemonSet.serviceAccount.name  }}
