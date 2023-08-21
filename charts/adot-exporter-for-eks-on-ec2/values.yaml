@@ -17,7 +17,7 @@ serviceAccount:
 adotCollector:
   image:
     name: "aws-otel-collector"
-    repository: "amazon/aws-otel-collector"
+    repository: "onyx-container/aws-observability/aws-otel-collector"
     tag: "v0.31.0"
     daemonSetPullPolicy: "IfNotPresent"
     sidecarPullPolicy: "Always"
