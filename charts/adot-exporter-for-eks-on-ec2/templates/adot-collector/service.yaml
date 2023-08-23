@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: otel-collector-service
-  namespace: opentelemetry-operator-system
+  name: {{ .Values.adotCollector.service.name}}
+  namespace: {{ .Values.adotCollector.service.namespace }}
 spec:
   ports:
   - name: grpc
-    port: 4317
+    port: {{ .Values.adotCollector.service.port }}
     protocol: TCP
-    targetPort: 4317
+    targetPort: {{ .Values.adotCollector.service.targetPort }}
   selector:
     app.kubernetes.io/component: opentelemetry
