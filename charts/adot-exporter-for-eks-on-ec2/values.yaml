@@ -10,7 +10,7 @@ additionalLabels: {}
   # app: adot
 
 serviceAccount:
-  create: true
+  create: False
   annotations: {}
   name: ""
 
@@ -33,7 +33,7 @@ adotCollector:
     namespace: "adot"
     namespaceOverride: ""
     serviceAccount:
-      create: true
+      create: false
       name: "adot-collector"
       annotations: {}
     clusterRoleName: "adot-collector-role"
