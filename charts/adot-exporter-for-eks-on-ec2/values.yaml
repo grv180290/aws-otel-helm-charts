@@ -25,7 +25,7 @@ adotCollector:
     enabled: true
     daemonSetName: "adot-collector-daemonset"
     createNamespace: false
-    namespace: "opentelemetry-operator-system"
+    namespace: "adot"
     namespaceOverride: ""
     serviceAccount:
       create: false
