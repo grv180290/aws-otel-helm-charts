@@ -17,8 +17,6 @@ spec:
       labels:
         name: {{ .Values.adotCollector.daemonSet.daemonSetName }}
         {{- include "adotCollector.daemonSet.labels" . | indent 8 }}
-      annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/adot-collector/configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: {{ .Values.adotCollector.daemonSet.containersName }}
@@ -33,7 +31,7 @@ spec:
           resources:
             {{- toYaml .Values.adotCollector.daemonSet.resources | nindent 12 }}
       imagePullSecrets:
-      - name: {{ .Values.adotCollector.daemonset.privateregistrysecret }}
+      - name: {{ .Values.adotCollector.daemonSet.privateregistrysecret }}
       volumes:
         {{- toYaml .Values.adotCollector.daemonSet.volumes | nindent 10 }}
       serviceAccountName: {{ .Values.adotCollector.daemonSet.serviceAccount.name  }}

@@ -25,16 +25,16 @@ data:
     processors:
       batch/traces:
         timeout: {{ .Values.adotCollector.daemonSet.processors.timeout }}
-        send_batch_size: {{ .Values.adotCollector.daemonset.processors.batch_size }}
+        send_batch_size: {{ .Values.adotCollector.daemonSet.processors.batch_size }}
     exporters:
       otlp/2:
-        endpoint: {{ .Values.adotCollector.daemonset.data_prepper_svc }}
+        endpoint: {{ .Values.adotCollector.daemonSet.data_prepper_svc }}
       tls: 
-        insecure: {{ .Values.adotCollector.daemonset.tls_setting_insecure | default "true" }}
+        insecure: {{ .Values.adotCollector.daemonSet.tls_setting_insecure | default "true" }}
     service:
       telemetry:
         logs:
-          level: {{ .Values.adotCollector.daemonset.log_level | default "info" }}
+          level: {{ .Values.adotCollector.daemonSet.log_level | default "info" }}
       pipelines:
         traces: 
           receivers: {{- range .Values.adotCollector.daemonSet.service.traces.receivers }}
