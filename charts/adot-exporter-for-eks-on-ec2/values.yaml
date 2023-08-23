@@ -21,6 +21,11 @@ adotCollector:
     tag: "v0.31.0"
     daemonSetPullPolicy: "IfNotPresent"
     sidecarPullPolicy: "Always"
+  service:
+    name: otel-collector-service
+    namespace: adot
+    port: 4317
+    targetPort: 4317 
   daemonSet:
     enabled: true
     daemonSetName: "adot-collector-daemonset"
