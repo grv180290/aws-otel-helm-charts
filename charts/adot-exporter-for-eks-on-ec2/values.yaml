@@ -31,6 +31,23 @@ adotCollector:
     app: "opentelemetry"
     component: "adot-conf"
     data_prepper_svc: "Data-prepper-svc-url-endpoint"
+    extensions:
+      healthCheck: ""
+      sigv4auth:
+        region: ""
+    tls_setting_insecure: true
+    log_level: "debug"
+    otlpreceivers:
+      grpcendpoint: 0.0.0.0:4317
+      httpendpoint: 0.0.0.0:4318
+    processors:
+      timeout: 1s
+      batch_size: 50
+    service:
+      traces: 
+        receivers: ["otlp"]
+        exporters: ["otlp/2"]
+      extensions: ["health_check", "sigv4auth"]
   clusterRoleName: "adot-collector-role"
   clusterRoleBindingName: "adot-collector-role-binding"
   daemonSet:
@@ -122,23 +139,6 @@ adotCollector:
         readOnly: true
       - name: "adot-config-vol"
         mountPath: "/conf"
-    extensions:
-      healthCheck: ""
-      sigv4auth:
-        region: ""
-    tls_setting_insecure: true
-    log_level: "debug"
-    otlpreceivers:
-      grpcendpoint: 0.0.0.0:4317
-      httpendpoint: 0.0.0.0:4318
-    processors:
-      timeout: 1s
-      batch_size: 50
-    service:
-      traces: 
-        receivers: ["otlp"]
-        exporters: ["otlp/2"]
-      extensions: ["health_check", "sigv4auth"]
   sidecar:
     enabled: false
     name: "adot-sidecar"
