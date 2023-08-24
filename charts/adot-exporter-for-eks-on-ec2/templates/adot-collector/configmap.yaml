@@ -12,35 +12,35 @@ metadata:
 data:
   adot-config:  |
     extensions:
-      health_check: {{ .Values.adotCollector.daemonSet.extensions.healthCheck }}
+      health_check: {{ .Values.adotCollector.configMap.extensions.healthCheck }}
       sigv4auth:
         region: {{ .Values.awsRegion }}
     receivers:
       otlp:
         protocols: 
           grpc:
-            endpoint: {{ .Values.adotCollector.daemonSet.otlpreceivers.grpcendpoint }}
+            endpoint: {{ .Values.adotCollector.configMap.otlpreceivers.grpcendpoint }}
           http:
-            endpoint: {{ .Values.adotCollector.daemonSet.otlpreceivers.httpendpoint }}
+            endpoint: {{ .Values.adotCollector.configMap.otlpreceivers.httpendpoint }}
     processors:
       batch/traces:
-        timeout: {{ .Values.adotCollector.daemonSet.processors.timeout }}
-        send_batch_size: {{ .Values.adotCollector.daemonSet.processors.batch_size }}
+        timeout: {{ .Values.adotCollector.configMap.processors.timeout }}
+        send_batch_size: {{ .Values.adotCollector.configMap.processors.batch_size }}
     exporters:
       otlp/2:
         endpoint: {{ .Values.adotCollector.data_prepper_svc }}
       tls: 
-        insecure: {{ .Values.adotCollector.daemonSet.tls_setting_insecure | default "true" }}
+        insecure: {{ .Values.adotCollector.configMap.tls_setting_insecure | default "true" }}
     service:
       telemetry:
         logs:
-          level: {{ .Values.adotCollector.daemonSet.log_level | default "info" }}
+          level: {{ .Values.adotCollector.configMap.log_level | default "info" }}
       pipelines:
         traces: 
-          receivers: {{- range .Values.adotCollector.daemonSet.service.traces.receivers }}
+          receivers: {{- range .Values.adotCollector.configMap.service.traces.receivers }}
           - {{.}} {{- end }}
-          exporters: {{- range .Values.adotCollector.daemonSet.service.traces.receivers }}
+          exporters: {{- range .Values.adotCollector.configMap.service.traces.receivers }}
           - {{.}} {{- end }}
-      extensions: {{- range .Values.adotCollector.daemonSet.service.extensions }}
+      extensions: {{- range .Values.adotCollector.configMap.service.extensions }}
       - {{.}} {{- end }}
 {{- end }}
