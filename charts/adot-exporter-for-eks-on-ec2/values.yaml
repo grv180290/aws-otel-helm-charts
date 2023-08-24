@@ -126,7 +126,6 @@ adotCollector:
       healthCheck: ""
       sigv4auth:
         region: ""
-    data_prepper_svc: "Data-prepper-svc-url-endpoint"
     tls_setting_insecure: true
     log_level: "debug"
     otlpreceivers:
