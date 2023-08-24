@@ -3,11 +3,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.adotCollector.daemonSet.configMap.name }}
+  name: {{ .Values.adotCollector.configMap.name }}
   namespace: {{ .Values.adotCollector.daemonSet.namespace }}
   labels:
-    app: {{ .Values.adotCollector.daemonSet.configMap.app }}
-    component: {{ .Values.adotCollector.daemonSet.configMap.component }}
+    app: {{ .Values.adotCollector.configMap.app }}
+    component: {{ .Values.adotCollector.configMap.component }}
     {{- include "adotCollector.daemonSet.labels" . | indent 4 }}
 data:
   adot-config:  |
@@ -28,7 +28,7 @@ data:
         send_batch_size: {{ .Values.adotCollector.daemonSet.processors.batch_size }}
     exporters:
       otlp/2:
-        endpoint: {{ .Values.adotCollector.daemonSet.data_prepper_svc }}
+        endpoint: {{ .Values.adotCollector.data_prepper_svc }}
       tls: 
         insecure: {{ .Values.adotCollector.daemonSet.tls_setting_insecure | default "true" }}
     service:
