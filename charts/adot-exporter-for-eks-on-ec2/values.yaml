@@ -33,7 +33,7 @@ adotCollector:
     namespace: "adot"
     namespaceOverride: ""
     serviceAccount:
-      create: false
+      create: true
       name: "adot-collector"
       annotations: {}
     clusterRoleName: "adot-collector-role"
