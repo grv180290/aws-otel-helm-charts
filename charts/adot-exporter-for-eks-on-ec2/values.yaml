@@ -26,6 +26,13 @@ adotCollector:
     namespace: adot
     port: 4317
     targetPort: 4317 
+  configMap:
+    name: "adot-conf"
+    app: "opentelemetry"
+    component: "adot-conf"
+    data_prepper_svc: "Data-prepper-svc-url-endpoint"
+  clusterRoleName: "adot-collector-role"
+  clusterRoleBindingName: "adot-collector-role-binding"
   daemonSet:
     enabled: true
     daemonSetName: "adot-collector-daemonset"
@@ -36,12 +43,6 @@ adotCollector:
       create: true
       name: "adot-collector"
       annotations: {}
-    clusterRoleName: "adot-collector-role"
-    clusterRoleBindingName: "adot-collector-role-binding"
-    configMap:
-      name: "adot-conf"
-      app: "opentelemetry"
-      component: "adot-conf"
     containersName: "adot-collector-container"
     env:
       - name: "K8S_NODE_NAME"
